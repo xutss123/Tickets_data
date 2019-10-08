@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+{%load static%}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{{event.id}} <br>
+Congrats, you added {{event.name}} !
+<a href="{%url 'tickets_app:ticket' event.id %}">Start creating</a>
+<a href="{%url 'tickets_app:index' %}">Create a new one</a>
+<a href="{%url 'tickets_app:finally' event.id %}">See overview</a>
+</body>
+</html>

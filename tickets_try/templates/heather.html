@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{%block content%}
+<ul style="">
+    <li>
+        <a href="tickets_app:index">Create Event</a>
+    </li>
+    <li>
+        <a href="{%url 'tickets_app:ticket' event.id %}">Tickets</a>
+    </li>
+    <li>
+        <a href="{%url 'tickets_app:shop' event.id%}">Shops</a>
+    </li>
+    <li>
+        <a href="{%url 'tickets_app:pair' event.id%}">Add Tickets to Shops</a>
+    </li>
+    <li>
+        <a href="{%url 'tickets_app:overview' event.id%}">Overview</a>
+    </li>
+</ul>
+{%endblock%}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+{%load static%}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="POST">
+    {%csrf_token%}
+    {{event_form}}
+    <input type="submit" value="Add event">
+</form>
+<label>Your events</label>
+<ul>
+{%for event in event_list%}
+    <li>
+{{event.name}} <a href="{%url 'tickets_app:ticket' event.id %}">Create Tickets</a>
+                <a href="{%url 'tickets_app:finally' event.id %}">Overview</a>
+        </li>
+{%endfor%}
+</ul>
+</body>
+</html>

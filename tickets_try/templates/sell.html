@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+{%load static%}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+
+{%for ticket in ticket_list%}
+    <form method="post" id="shop">
+            {%csrf_token%}
+    <li>
+        <label>{{ticket.product}}</label>
+        {{ticket.price}}$
+        <input type="number"  name="id" value="{{ticket.product_id}}" hidden>
+        <input name="quantity" type="number" value="">
+        <input type="submit" value="buy">
+    </li>
+        </form>
+{%endfor%}
+</ul>
+</body>
+</html>

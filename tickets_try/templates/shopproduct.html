@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{%load static%}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body onload="add_stuff()">
+<div id="container">
+<form method="post" action="{% url 'tickets_app:pair' event %}">
+    {%csrf_token%}
+    {{shop_product_form}}
+    <input type="submit" value="pair">
+</form>
+    <a href="{%url 'tickets_app:finally' event %}">See overview</a>
+</div>
+</body>
+</html>

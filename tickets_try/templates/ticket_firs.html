@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="POST">
+    {%csrf_token%}
+{{product_form}}
+    <select name="event_selection" onchange="get_stuff()">
+    {%for event in event_list%}
+    <option value="{{event.id}}" name="selected_event">{{event.name}}</option>
+    {%endfor%}
+        </select>
+    <select name="shop_selection" onchange="get_stuff()">
+    {%for shop in shop_list%}
+        <option value="{{shop.id}}" name="selected_shop">{{shop.name}}</option>
+    {%endfor%}
+        </select>
+    <input type="text" name="show_shop" hidden>
+    <input type="text" name="show_event" hidden>
+    <input type="submit" value="add">
+</form>
+</body>
+</html>
+
+<script>
+var event;
+
+function get_stuff(){
+    var eventlist = document.getElementsByName('event_selection')[0];
+    var shoplist = document.getElementsByName('shop_selection')[0];
+       var event = eventlist.options[eventlist.selectedIndex].value;
+    var shop = shoplist.options[shoplist.selectedIndex].value;
+    document.getElementsByName('show_shop')[0].value = shop;
+    document.getElementsByName('show_event')[0].value = event;
+    }
+</script>
+
+
+        # if shop_product_form.data.get('price') == '0' or shop_product_form.data.get('max_amount') == '0':
+        #     __request = change_form(request, shop_product_form)
+        #     shop_product_form = ShopProductForm(data=__request, event_id=event)
+        # _product = shop_product_form.data.get('product')
+        # _ma = shop_product_form.data.get('max_amount')
+        # if shop_product_form.is_valid() and check_sum(_product, _max_value):
+        #     shop_product_form.save()
+        #     return render(request, template_name=self.template_name,
+        #                     context={'event': event,
+        #                     'shop_product_form': ShopProductForm(event_id=event)})
+        # else:
+        #     print('\033[34m{}\033[0m'.format('nothing wrorkssssss'))
+
+
+# def change_form(request, form):
+#     __pr = form.data.get('product')
+#     new = request.POST.copy()
+#     if form.data.get('price') == '0' and form.data.get('max_amount') == '0':
+#         if form.data.get('price') == '0':
+#             new = request.POST.copy()
+#             _take_pr = Product.objects.get(pk=__pr).price
+#             new.update({'price': str(_take_pr)})
+#         if form.data.get('max_amount') == '0':
+#             _take = Product.objects.get(pk=__pr).max_amount
+#             new.update({'max_amount': str(_take)})
+#     return new
+
+#
+# def check_sum(product, max_value):
+#     _product = Product.objects.get(pk=product)
+#     _sum= 0
+#
+#     if ShopINProduct.objects.filter(product=product):
+#         _list = ShopINProduct.objects.filter(product=product)
+#         for shop in _list:
+#             _sum += shop.max_amount
+#         if _sum + int(max_value) > _product.max_amount:
+#             return False
+#         else:
+#             return True
+#     else:
+#         if int(max_value) > _product.max_amount:
+#             return False
+#         else:
+#             return True
+
+        # event = Event.objects\
+        #     .prefect_related('product_set')\
+        #     .get(pk=event_id)
+        #
+        # product_list = event.product_set.all()
+
+# stuff from script
+
+
+<script>
+
+function add_stuff(){
+    var is_price_changed = document.getElementsByName('Is_price_changed')[0];
+    var is_changed = document.getElementsByName('Is_max_amount_changed')[0];
+    var price = document.getElementsByName('price')[0];
+     price.style.visibility = "hidden";
+     price.previousSibling.style.visibility = "hidden";
+     var amount = document.getElementsByName('max_amount')[0];
+    is_price_changed.onclick = function(){check_price()};
+    amount.style.visibility = "hidden";
+    amount.previousSibling.style.visibility = "hidden";
+    is_changed.onclick = function(){check_amount()};
+}
+function check_price()
+    {
+        var is_changed = document.getElementsByName('Is_price_changed')[0];
+        var price = document.getElementsByName('price')[0];
+        if(is_changed.checked == true)
+        {
+        price.style.visibility = "visible";
+        price.previousSibling.style.visibility = "visible";
+        }
+        else
+        {
+        price.style.visibility = "hidden";
+        price.previousSibling.style.visibility = "hidden";
+        price.value = "";
+        }
+    }
+
+    function check_amount()
+    {
+        var is_changed = document.getElementsByName('Is_max_amount_changed')[0];
+        var amount = document.getElementsByName('max_amount')[0];
+        if(is_changed.checked == true)
+        {
+        amount.style.visibility = "visible";
+        amount.previousSibling.style.visibility = "visible";
+        }
+        else
+        {
+        amount.style.visibility = "hidden";
+        amount.previousSibling.style.visibility = "hidden";
+        }
+    }
+</script>
+
+
+////// another version of script
+
+
+<script>
+
+function add_stuff(){
+    var is_price_changed = document.getElementsByName('is_price_changed')[0];
+    var is_changed = document.getElementsByName('is_quantity_changed')[0];
+    var price = document.getElementsByName('price')[0];
+     price.disabled = true;
+     var amount = document.getElementsByName('quantity')[0];
+    is_price_changed.onclick = function(){check_price()};
+    amount.disabled = true;
+    is_changed.onclick = function(){check_amount()};
+}
+function check_price()
+    {
+        var is_changed = document.getElementsByName('is_price_changed')[0];
+        var price = document.getElementsByName('price')[0];
+        if(is_changed.checked == true)
+        {
+        price.disabled = false;
+        }
+        else
+        {
+        price.disabled = true;
+        }
+    }
+
+    function check_amount()
+    {
+        var is_changed = document.getElementsByName('is_quantity_changed')[0];
+        var amount = document.getElementsByName('quantity')[0];
+        if(is_changed.checked == true)
+        {
+        amount.disabled = false;
+        }
+        else
+        {
+        amount.disabled = true;
+        }
+    }
+</script>

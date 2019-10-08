@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+{%load static%}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body onload="get_stuff()">
+<p hidden name="event___">{{event.id}}</p>
+<form method="post">
+    {%csrf_token%}
+    {{shop_form}}
+    <input type="submit" value="add shop">
+</form>
+<label>Your shops</label>
+<ul>
+{%for shop in shop_list%}
+    <li>
+        <label>{{shop.name}}</label>
+        {{shop.venue}}
+    </li>
+{%endfor%}
+</ul>
+<a href="{%url 'tickets_app:ticket' event.id %}">Add more tickets</a>
+<a href="{%url 'tickets_app:pair' event.id %}">Add tickets to shops</a>
+</body>
+</html>
+<script>
+function get_stuff(){
+    document.getElementsByName('event')[0].value = {{event.id}};
+        }
+</script>
